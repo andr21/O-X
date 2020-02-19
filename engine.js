@@ -1,6 +1,8 @@
 var banana = new MindObject
 
 
+var gameState = '---------';
+
 banana.makeMove('---------','O');
 banana.makeMove('------OX-','O');
 banana.makeMove('-X---OOX-','O');
@@ -8,6 +10,21 @@ banana.makeMove('------OX-','O');
 
 banana.gameOver('Draw');
 
+
+function humanMove(move,OorX){
+
+ gameState = gameState.replaceAt(move,OorX);
+
+}
+
+
+function mindMove(OorX){
+ var move = banana.makeMove(gameState,OorX);
+ 
+ gameState = gameState.replaceAt(move,OorX);
+ 
+ return move;
+}
 
 
 
@@ -51,3 +68,8 @@ testing (play vs human) {
 
 
 */
+
+
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+}

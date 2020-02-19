@@ -1,3 +1,30 @@
+
+
+var squareToMove = {
+'a':0
+,'b':1
+,'c':2
+,'d':3
+,'e':4
+,'f':5
+,'g':6
+,'h':7
+,'i':8
+};
+
+var moveToSquare = {
+0:'a'
+,1:'b'
+,2:'c'
+,3:'d'
+,4:'e'
+,5:'f'
+,6:'g'
+,7:'h'
+,8:'i'
+};
+
+
 // NOUGHTS AND CROSSES GAME TEST YO 
 
 // Define all the elements
@@ -37,6 +64,8 @@ $( "p.reset" ).click(function() {
 // 1 = NOUGHT, 0 = CROSS
 
 // On clicking a square count the clicks and change the class, this will work only once per square
+
+/*
 $(gameSquare).bind("click", function(){
 
 count();
@@ -155,6 +184,8 @@ console.log("TIE!");
 });
 
 
+*/
+
 
 
 /*
@@ -169,3 +200,99 @@ this will have button to kick off training in the engine.
 
 + a button for machine goes first :)
 */
+
+
+
+
+
+
+
+
+function squareClicked(move,OorX){
+ humanMove(move,OorX);
+}
+
+
+
+function mindToMove(){
+
+count();
+var OorX = '-';
+
+if (x == 1) {
+
+OorX = 'O';
+
+} else if (x == 0) {
+
+resetClick(); 
+OorX = 'X';
+
+}
+
+ var move = mindMove(OorX);
+ 
+ console.log(move);
+ console.log(moveToSquare[move]);
+ 
+ var square = $(game).childNodes[move];
+
+ console.log(square);
+ 
+if (OorX === 'X') {
+
+square.addClass("cross");
+square.removeClass("blank"); 
+
+} else if (OorX === 'O') {
+
+square.addClass("nought");
+square.removeClass("blank");
+
+}
+
+square.unbind();
+
+}
+
+
+
+
+
+
+$(gameSquare).bind("click", function(){
+
+count();
+var OorX = '-';
+
+if (x == 1) {
+
+$(this).addClass("nought");
+$(this).removeClass("blank");
+
+OorX = 'O';
+
+} else if (x == 0) {
+
+$(this).addClass("cross");
+$(this).removeClass("blank"); 
+resetClick(); 
+
+OorX = 'X';
+
+}
+
+var move = squareToMove[$(this).attr("id")]
+
+squareClicked(move,OorX);
+
+// Unbind the button so it only fires once
+   $(this).unbind();
+
+});
+
+
+
+
+
+
