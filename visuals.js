@@ -33,6 +33,8 @@ gameSquare = "ul.game li.blank",
 nought = "ul.game li.nought",
 cross = "ul.game li.cross";
 
+var isGameOver = false;
+
 // Define array for the noughts and crosses
 var gameResult = [nought, cross];
 
@@ -210,6 +212,10 @@ this will have button to kick off training in the engine.
 
 function squareClicked(move,OorX){
  humanMove(move,OorX);
+ if (isGameOver === false) {
+   setTimeout(mindToMove,500);
+ }
+ 
 }
 
 
@@ -232,26 +238,27 @@ OorX = 'X';
 
  var move = mindMove(OorX);
  
- console.log(move);
- console.log(moveToSquare[move]);
+ //console.log(move);
+ //console.log(moveToSquare[move]);
  
- var square = $(game).childNodes[move];
+ var square = document.getElementById(moveToSquare[move]);
 
- console.log(square);
+ //console.log(square);
  
 if (OorX === 'X') {
 
-square.addClass("cross");
-square.removeClass("blank"); 
+square.classList.add("cross");
+square.classList.remove("blank"); 
 
 } else if (OorX === 'O') {
 
-square.addClass("nought");
-square.removeClass("blank");
+square.classList.add("nought");
+square.classList.remove("blank");
 
 }
 
-square.unbind();
+//hmmmm might need to handle this somewhere
+//square.unbind();
 
 }
 
