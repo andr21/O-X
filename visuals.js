@@ -238,12 +238,8 @@ OorX = 'X';
 
  var move = mindMove(OorX);
  
- //console.log(move);
- //console.log(moveToSquare[move]);
- 
  var square = document.getElementById(moveToSquare[move]);
 
- //console.log(square);
  
 if (OorX === 'X') {
 
