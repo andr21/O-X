@@ -6,7 +6,7 @@ this.network = [
 
 ];
 
-console.log(this.network);
+//console.log(this.network);
 
 this.gameMemory = [];
 
@@ -23,15 +23,15 @@ if (OorX === 'O') {
   
 var networkPart= this.doIKnowThisState(gameState);
 
-console.log(networkPart);
+//console.log(networkPart);
 
 var move = this.chooseFromNetworkPart(networkPart);
-console.log(move);
+//console.log(move);
 
 /* save into gameMemory */
 this.gameMemory.push([networkPart, move]);
 
-console.log(this.gameMemory);
+//console.log(this.gameMemory);
 
 return move;
 
@@ -46,7 +46,7 @@ var arrayLength = this.network.length;
 for (var i = 0; i < arrayLength; i++) {
     //console.log(this.network[i][0]);
     if (this.network[i][0] === gameState){
-       console.log('i know this state');
+       //console.log('i know this state');
        return i
     }
 }
@@ -66,7 +66,7 @@ Returns bit of network
 */
 
 
-console.log('i dont know this state... adding..');
+//console.log('i dont know this state... adding..');
 
 var arrayToAdd = [0,0,0,0,0,0,0,0,0];
 
@@ -106,12 +106,12 @@ for (var i = 0; i < choices.length; i++) {
 total = total + choices[i];
 
 }
-console.log(total);
+//console.log(total);
 
 
 var selection = Math.floor(Math.random() * total) + 1
 
-console.log(selection);
+//console.log(selection);
 
 
 for (var i = 0; i < choices.length; i++) {
@@ -158,7 +158,7 @@ var increment = 0;
   }
 
 gameMemory = [];
-console.log(this.network);
+//console.log(this.network);
 
 }
 

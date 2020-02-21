@@ -206,12 +206,38 @@ this will have button to kick off training in the engine.
 
 
 
+function isGameComplete(){
+  var status = isGameDone(gameState) 
+ if (status != 'No') {
+  isGameOver = true;
+  
+   if (status === 'X'){
+   
+   $("h1").replaceWith("<h1><span class='cross'>CROSS WINS!</span></h1>");
 
+$(cross).addClass("scale");
+$(nought).addClass("fade");
+   
+   } else if ( status === 'O') {
+   
+   $("h1").replaceWith("<h1><span class='nought'>NOUGHT WINS!</span></h1>");
+
+$(nought).addClass("scale");
+$(cross).addClass("fade");
+   
+   }
+ 
+ }
+
+}
 
 
 
 function squareClicked(move,OorX){
  humanMove(move,OorX);
+ 
+ isGameComplete();
+ 
  if (isGameOver === false) {
    setTimeout(mindToMove,500);
  }
@@ -256,6 +282,7 @@ square.classList.remove("blank");
 //hmmmm might need to handle this somewhere
 //square.unbind();
 
+isGameComplete()
 }
 
 
