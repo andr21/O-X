@@ -81,14 +81,18 @@ return 'No';
 }
 
 
-function training(numberOfGames){
+
+function testMind(){
+
+var numberOfGames = 1000;
+var numberOfWins = 0;
 
 gameState = '---------';
 var OorX = 'O';
 
 //interesting.. do you want to train it vs a newbie or vs itself?
-//var oposition = new MindObject;
-var oposition = banana;
+var oposition = new MindObject;
+//var oposition = banana;
 
  for (let gameNumber = 1; gameNumber <= numberOfGames; gameNumber++) {
 
@@ -110,8 +114,9 @@ gameState = gameState.replaceAt(move,OorX);
   banana.gameOver('Win');
   oposition.gameOver('Loss');
   
-  console.log('Win');
-  console.log(banana.network);
+  numberOfWins++;
+  //console.log('Win');
+  //console.log(banana.network);
   
   break;
   } else if ( isGameDone(gameState) === 'Draw') {
@@ -137,8 +142,8 @@ if ( isGameDone(gameState) === 'X' || isGameDone(gameState) === 'O' ) {
   banana.gameOver('Loss');
   oposition.gameOver('Win');
   
-  console.log('Loss');
-  console.log(banana.network);
+  //console.log('Loss');
+  //console.log(banana.network);
   
   break;
   } else if ( isGameDone(gameState) === 'Draw') {
@@ -153,21 +158,22 @@ if ( isGameDone(gameState) === 'X' || isGameDone(gameState) === 'O' ) {
  }
  
  
- 
  if (OorX === 'X') {
  OorX = 'O'
 } else if (OorX === 'O') {
  OorX = 'X'
 }
  
-  
   }
   //console.log('new game')
   gameState = '---------';
 
  }
 
+console.log((numberOfWins/numberOfGames) * 100);
+console.log(banana.network.length);
 }
+
 
 /*
 
@@ -199,6 +205,110 @@ testing (play vs human) {
 
 
 */
+
+
+
+
+
+
+function training(numberOfGames){
+
+gameState = '---------';
+var OorX = 'O';
+
+//interesting.. do you want to train it vs a newbie or vs itself?
+//var oposition = new MindObject;
+var oposition = banana;
+
+ for (let gameNumber = 1; gameNumber <= numberOfGames; gameNumber++) {
+
+  for (let gameMove = 1; gameMove < 10; gameMove++) {
+  
+ //alternating turns
+ if ( (gameMove%2 + gameNumber%2)%2 === 0){
+ 
+ //banana move
+ 
+  var move = banana.makeMove(gameState,OorX);
+  //console.log(banana.network);
+  //console.log(banana.gameMemory);
+
+gameState = gameState.replaceAt(move,OorX);
+ 
+  if ( isGameDone(gameState) === 'X' || isGameDone(gameState) === 'O' ) {
+  
+  banana.gameOver('Win');
+  oposition.gameOver('Loss');
+  
+  //console.log('Win');
+  //console.log(banana.network);
+  
+  break;
+  } else if ( isGameDone(gameState) === 'Draw') {
+  
+  banana.gameOver('Draw');
+  oposition.gameOver('Draw');
+  
+  break;
+  }
+  
+  
+ } else {
+ 
+ //oposition move
+var move = oposition.makeMove(gameState,OorX);
+
+gameState = gameState.replaceAt(move,OorX);
+
+
+
+if ( isGameDone(gameState) === 'X' || isGameDone(gameState) === 'O' ) {
+  
+  banana.gameOver('Loss');
+  oposition.gameOver('Win');
+  
+  //console.log('Loss');
+  //console.log(banana.network);
+  
+  break;
+  } else if ( isGameDone(gameState) === 'Draw') {
+  
+  banana.gameOver('Draw');
+  oposition.gameOver('Draw');
+  
+  break;
+  }
+
+
+ }
+ 
+ 
+ if (OorX === 'X') {
+ OorX = 'O'
+} else if (OorX === 'O') {
+ OorX = 'X'
+}
+ 
+  }
+  //console.log('new game')
+  gameState = '---------';
+
+ }
+console.log('training done');
+console.log(banana.network);
+console.log(banana.network.length);
+}
+
+
+
+function gogo(){
+
+for (let bob = 1; bob <= 1; bob++) {
+ training(5000);
+ testMind();
+}
+
+}
 
 
 String.prototype.replaceAt=function(index, replacement) {

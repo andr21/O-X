@@ -40,6 +40,9 @@ return move;
 
 this.doIKnowThisState = function(gameState){
 
+if (gameState.length != 9 ) {
+ console.log('ERROR!!!!!');
+}
 
 var arrayLength = this.network.length;
 
@@ -142,9 +145,9 @@ Reset remember game
 var increment = 0;
 
    if (result === 'Win'){
-     increment = 2;
-   } else if (result === 'Draw'){
      increment = 1;
+   } else if (result === 'Draw'){
+     increment = 0;
    } else if (result === 'Loss'){
      increment = -1;
    }
