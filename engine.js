@@ -27,7 +27,7 @@ function mindMove(OorX){
 }
 
 
-isGameDone('XXX------');
+//isGameDone('XXX------');
 
 function isGameDone(gameState) {
 
@@ -86,7 +86,9 @@ function training(numberOfGames){
 gameState = '---------';
 var OorX = 'O';
 
-var oposition = new MindObject;
+//interesting.. do you want to train it vs a newbie or vs itself?
+//var oposition = new MindObject;
+var oposition = banana;
 
  for (let gameNumber = 1; gameNumber <= numberOfGames; gameNumber++) {
 
@@ -98,7 +100,8 @@ var oposition = new MindObject;
  //banana move
  
   var move = banana.makeMove(gameState,OorX);
-  console.log(banana.network);
+  //console.log(banana.network);
+  //console.log(banana.gameMemory);
 
 gameState = gameState.replaceAt(move,OorX);
  

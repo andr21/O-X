@@ -157,7 +157,7 @@ var increment = 0;
 
   }
 
-gameMemory = [];
+this.gameMemory = [];
 //console.log(this.network);
 
 }
