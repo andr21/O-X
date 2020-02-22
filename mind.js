@@ -13,6 +13,9 @@ this.gameMemory = [];
 
 this.makeMove = function(gameState,OorX){
 
+if (gameState.length != 9 ) {
+ console.log('ERROR!!!!!');
+}
 
 if (OorX === 'O') {
  gameState = gameState.replace(/O/g,'p');
@@ -31,6 +34,12 @@ var move = this.chooseFromNetworkPart(networkPart);
 /* save into gameMemory */
 this.gameMemory.push([networkPart, move]);
 
+
+if (this.gameMemory.length > 5) {
+ console.log('Memory issue makemove');
+ console.log(this.gameMemory);
+}
+
 //console.log(this.gameMemory);
 
 return move;
@@ -39,10 +48,6 @@ return move;
 
 
 this.doIKnowThisState = function(gameState){
-
-if (gameState.length != 9 ) {
- console.log('ERROR!!!!!');
-}
 
 var arrayLength = this.network.length;
 
@@ -83,6 +88,11 @@ for (var i = 0; i < gameState.length; i++) {
 
 
 this.network.push([gameState,arrayToAdd]);
+
+if ( arrayToAdd === [0,0,0,0,0,0,0,0,0]) {
+ console.log('shouldnt get here');
+}
+
 
 return arrayLength;
 
@@ -127,7 +137,11 @@ selection = selection - choices[i];
 
 }
 
-
+console.log('this shouldnt be reached');
+console.log(total);
+console.log('id: ' + networkPart);
+console.log(this.network[networkPart][1]);
+console.log(this.network[networkPart][0]);
 }
 
 
@@ -140,7 +154,14 @@ Loss: take
 Reset remember game
 */
 
+var needCleaning = false;
+
 /* will have to have a play with these to see what gives the best results */
+
+if (this.gameMemory.length > 5) {
+ console.log('Memory error');
+ console.log(this.gameMemory);
+}
 
 var increment = 0;
 
@@ -158,17 +179,47 @@ var increment = 0;
    
   this.network[this.gameMemory[i][0]][1][this.gameMemory[i][1]] += increment;
 
+
+//need to remove from network if incremented down to 0
+
+if (this.network[this.gameMemory[i][0]][1] === [0,0,0,0,0,0,0,0,0]) {
+ console.log('time to remove');
+}
+
+var addy = 0;
+for (var j = 0; j < 9; j++) {
+ 
+ addy = addy + this.network[this.gameMemory[i][0]][1][j]
+}
+if (addy <= 0) {
+ //console.log('alert!!!!');
+ //console.log(this.network[this.gameMemory[i][0]][1]);
+ needCleaning = true;
+}
+
+
+
+
   }
 
 this.gameMemory = [];
+ if (needCleaning === true){
+  this.cleanNetwork()
+ }
 //console.log(this.network);
 
 }
 
 
-
+ 
+ this.cleanNetwork = function(){
+ 
+ 
+ }
 
 }
+
+
 
 
 

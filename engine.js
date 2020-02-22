@@ -92,7 +92,7 @@ var OorX = 'O';
 
 //interesting.. do you want to train it vs a newbie or vs itself?
 var oposition = new MindObject;
-//var oposition = banana;
+
 
  for (let gameNumber = 1; gameNumber <= numberOfGames; gameNumber++) {
 
@@ -217,8 +217,8 @@ gameState = '---------';
 var OorX = 'O';
 
 //interesting.. do you want to train it vs a newbie or vs itself?
-//var oposition = new MindObject;
-var oposition = banana;
+var oposition = new MindObject;
+oposition.network = banana.network;
 
  for (let gameNumber = 1; gameNumber <= numberOfGames; gameNumber++) {
 
@@ -228,7 +228,7 @@ var oposition = banana;
  if ( (gameMove%2 + gameNumber%2)%2 === 0){
  
  //banana move
- 
+ //console.log('b move');
   var move = banana.makeMove(gameState,OorX);
   //console.log(banana.network);
   //console.log(banana.gameMemory);
@@ -256,6 +256,7 @@ gameState = gameState.replaceAt(move,OorX);
  } else {
  
  //oposition move
+ //console.log('o move');
 var move = oposition.makeMove(gameState,OorX);
 
 gameState = gameState.replaceAt(move,OorX);
@@ -289,14 +290,21 @@ if ( isGameDone(gameState) === 'X' || isGameDone(gameState) === 'O' ) {
  OorX = 'X'
 }
  
+ if(gameMove > 9) {
+  console.log('should bave broken loop by now')
+  console.log(gameState);
+ }
+ 
   }
   //console.log('new game')
   gameState = '---------';
+  //console.log('blank: ');
+  //console.log(banana.gameMemory);
 
  }
 console.log('training done');
 console.log(banana.network);
-console.log(banana.network.length);
+console.log('network size: ' + banana.network.length);
 }
 
 
