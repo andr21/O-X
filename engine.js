@@ -82,16 +82,22 @@ return 'No';
 
 
 
+
+
+
+
 function testMind(){
 
 var numberOfGames = 1000;
 var numberOfWins = 0;
+var numberOfLosses = 0;
 
 gameState = '---------';
 var OorX = 'O';
 
 //interesting.. do you want to train it vs a newbie or vs itself?
 var oposition = new MindObject;
+banana.gameMemory = [];
 
 
  for (let gameNumber = 1; gameNumber <= numberOfGames; gameNumber++) {
@@ -142,6 +148,7 @@ if ( isGameDone(gameState) === 'X' || isGameDone(gameState) === 'O' ) {
   banana.gameOver('Loss');
   oposition.gameOver('Win');
   
+  numberOfLosses++;
   //console.log('Loss');
   //console.log(banana.network);
   
@@ -170,8 +177,11 @@ if ( isGameDone(gameState) === 'X' || isGameDone(gameState) === 'O' ) {
 
  }
 
-console.log((numberOfWins/numberOfGames) * 100);
-console.log(banana.network.length);
+console.log('Win rate: ' + (numberOfWins/numberOfGames) * 100 +'%');
+console.log('Draw rate: ' + ((numberOfGames-numberOfWins-numberOfLosses)/numberOfGames) * 100 +'%');
+console.log('Loss rate: ' + (numberOfLosses/numberOfGames) * 100 +'%');
+console.log('Network size: ' + banana.network.length);
+console.log('Total games played: ' + banana.numberOfGamesPlayed);
 }
 
 
@@ -217,6 +227,8 @@ gameState = '---------';
 var OorX = 'O';
 
 //interesting.. do you want to train it vs a newbie or vs itself?
+banana.gameMemory = [];
+
 var oposition = new MindObject;
 oposition.network = banana.network;
 
@@ -305,6 +317,7 @@ if ( isGameDone(gameState) === 'X' || isGameDone(gameState) === 'O' ) {
 console.log('training done');
 console.log(banana.network);
 console.log('network size: ' + banana.network.length);
+console.log('Total games played: ' + banana.numberOfGamesPlayed);
 }
 
 

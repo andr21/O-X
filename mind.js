@@ -6,6 +6,8 @@ this.network = [
 
 ];
 
+this.numberOfGamesPlayed = 0;
+
 //console.log(this.network);
 
 this.gameMemory = [];
@@ -51,6 +53,7 @@ this.doIKnowThisState = function(gameState){
 
 var arrayLength = this.network.length;
 
+//console.log(arrayLength);
 for (var i = 0; i < arrayLength; i++) {
     //console.log(this.network[i][0]);
     if (this.network[i][0] === gameState){
@@ -153,7 +156,7 @@ Loss: take
 
 Reset remember game
 */
-
+this.numberOfGamesPlayed++;
 var needCleaning = false;
 
 /* will have to have a play with these to see what gives the best results */
@@ -162,6 +165,17 @@ if (this.gameMemory.length > 5) {
  console.log('Memory error');
  console.log(this.gameMemory);
 }
+
+if (this.gameMemory.length < 2) {
+ console.log('this shouldnt be hit, game over error');
+ console.log(this.gameMemory);
+}
+
+if (this.network.length < 2) {
+ console.log('this shouldnt be hit, game over error with network');
+ console.log(this.gameMemory);
+}
+//console.log(this.gameMemory);
 
 var increment = 0;
 
@@ -177,31 +191,32 @@ var increment = 0;
 
   for (var i = 0; i < this.gameMemory.length; i++) {
    
+
   this.network[this.gameMemory[i][0]][1][this.gameMemory[i][1]] += increment;
 
 
 //need to remove from network if incremented down to 0
 
-var addy = 0;
-for (var j = 0; j < 9; j++) {
- 
- addy = addy + this.network[this.gameMemory[i][0]][1][j]
-}
-if (addy <= 0) {
- console.log('time for cleaning');
- //console.log(this.network[this.gameMemory[i][0]][1]);
- needCleaning = true;
-}
-
-
-
+          var addy = 0;
+          for (var j = 0; j < 9; j++) {
+           
+           addy = addy + this.network[this.gameMemory[i][0]][1][j]
+          }
+          if (addy <= 0) {
+           //console.log('time for cleaning');
+           //console.log(this.network[this.gameMemory[i][0]][1]);
+           needCleaning = true;
+          }
 
   }
 
-this.gameMemory = [];
+
  if (needCleaning === true){
-  this.cleanNetwork()
+  this.cleanNetwork();
+  needCleaning = false;
  }
+ this.gameMemory = [];
+ //console.log('gameMemory emptied');
 //console.log(this.network);
 
 }
@@ -209,7 +224,7 @@ this.gameMemory = [];
 
  
  this.cleanNetwork = function(){
- console.log('cleaning...');
+ //console.log('cleaning...');
  
  var arrayLength = this.network.length;
 
@@ -225,16 +240,17 @@ for (var j = 0; j < 9; j++) {
     
     
     if (addy <= 0){
-       console.log('removing from network');
+       //console.log('removing from network');
        
-       console.log(this.network.length);
+       //console.log(this.network.length);
        this.network.splice(i,1);
-       console.log(this.network.length);
+       //console.log(this.network.length);
        i--;
        arrayLength = this.network.length;
     }
  }
  
+  //console.log('cleaning done');
  }
 
 
