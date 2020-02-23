@@ -182,17 +182,13 @@ var increment = 0;
 
 //need to remove from network if incremented down to 0
 
-if (this.network[this.gameMemory[i][0]][1] === [0,0,0,0,0,0,0,0,0]) {
- console.log('time to remove');
-}
-
 var addy = 0;
 for (var j = 0; j < 9; j++) {
  
  addy = addy + this.network[this.gameMemory[i][0]][1][j]
 }
 if (addy <= 0) {
- //console.log('alert!!!!');
+ console.log('time for cleaning');
  //console.log(this.network[this.gameMemory[i][0]][1]);
  needCleaning = true;
 }
@@ -213,9 +209,35 @@ this.gameMemory = [];
 
  
  this.cleanNetwork = function(){
+ console.log('cleaning...');
  
+ var arrayLength = this.network.length;
+
+ for (var i = 0; i < arrayLength; i++) {
+    //console.log(this.network[i][0]);
+    
+    var addy = 0;
+for (var j = 0; j < 9; j++) {
+ 
+ addy = addy + this.network[i][1][j];
+}
+    
+    
+    
+    if (addy <= 0){
+       console.log('removing from network');
+       
+       console.log(this.network.length);
+       this.network.splice(i,1);
+       console.log(this.network.length);
+       i--;
+       arrayLength = this.network.length;
+    }
+ }
  
  }
+
+
 
 }
 
