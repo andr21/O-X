@@ -34,12 +34,13 @@ var move = this.chooseFromNetworkPart(networkPart);
 //console.log(move);
 
 /* save into gameMemory */
-this.gameMemory.push([networkPart, move]);
+this.gameMemory.push([networkPart, move,gameState]);
 
 
 if (this.gameMemory.length > 5) {
  console.log('Memory issue makemove');
  console.log(this.gameMemory);
+ console.log(this.network);
 }
 
 //console.log(this.gameMemory);
@@ -191,8 +192,22 @@ var increment = 0;
 
   for (var i = 0; i < this.gameMemory.length; i++) {
    
+    //instead of using the index refinding it
+  //this.network[this.gameMemory[i][0]][1][this.gameMemory[i][1]] += increment;
 
-  this.network[this.gameMemory[i][0]][1][this.gameMemory[i][1]] += increment;
+    var arrayLength = this.network.length;
+
+    //console.log(arrayLength);
+    for (var k = 0; k < arrayLength; k++) {
+        //console.log(this.network[i][0]);
+        if (this.network[k][0] === this.gameMemory[i][2]){
+           //console.log('i know this state');
+           this.network[k][1][this.gameMemory[i][1]] += increment;
+           break;
+        }
+    }
+
+
 
 
 //need to remove from network if incremented down to 0
@@ -200,7 +215,7 @@ var increment = 0;
           var addy = 0;
           for (var j = 0; j < 9; j++) {
            
-           addy = addy + this.network[this.gameMemory[i][0]][1][j]
+           addy = addy + this.network[k][1][j]
           }
           if (addy <= 0) {
            //console.log('time for cleaning');
