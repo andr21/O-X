@@ -23,8 +23,36 @@
             <li class="blank" id="i"></li>
         </ul>
   
+  <button onclick="mindToMove()" type="button">Let the computer go first</button>
   <br>
   <button onclick="gameReset()" type="button">Reset</button>
+  
+  <br>
+  
+  
+
+
+<form id="trainForm" style="margin: 0; padding: 0;">
+  <p>
+    Train computer <input type="number" id="trainQuantity" name="quantity" min="1" max="1000000" value="5000">x
+    <input style="display: inline;" type="submit" value="Go" />
+  </p>
+</form>
+  
+  
+  
+  
+  
+  <p>
+  Stats:
+  <br>
+  Games played:
+  <br>
+  Network size:
+  <br>
+  Latest test results:
+  
+  </p>
   
   
   <script src="jquery.js"></script>
