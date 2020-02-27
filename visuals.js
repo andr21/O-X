@@ -317,11 +317,34 @@ var move = squareToMove[$(this).attr("id")]
 squareClicked(move,OorX);
 
 // Unbind the button so it only fires once
-   $(this).unbind();
+   //$(this).unbind();
 
 });
 
 
+
+function gameReset() {
+ reset();
+ 
+  for (var i = 0; i < 9; i++) {
+  
+  var square = document.getElementById(moveToSquare[i]);
+  
+  square.classList.remove("nought");
+  square.classList.remove("cross");
+  square.classList.add("blank"); 
+  square.classList.remove("scale");
+  square.classList.remove("fade");
+  
+     $("h1").replaceWith("<h1><span class='nought'>NOUGHTS</span> & <span class='cross'>CROSSES</span></h1>");
+
+  
+  
+  isGameOver = false;
+  }
+  
+  
+}
 
 
 

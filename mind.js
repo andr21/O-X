@@ -270,6 +270,10 @@ for (var j = 0; j < 9; j++) {
 
 
 
+this.reset = function() {
+ this.gameMemory = [];
+}
+
 }
 
 
