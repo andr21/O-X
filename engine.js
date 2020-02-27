@@ -182,6 +182,8 @@ console.log('Draw rate: ' + ((numberOfGames-numberOfWins-numberOfLosses)/numberO
 console.log('Loss rate: ' + (numberOfLosses/numberOfGames) * 100 +'%');
 console.log('Network size: ' + banana.network.length);
 console.log('Total games played: ' + banana.numberOfGamesPlayed);
+
+return 'Win: ' + Math.round((numberOfWins/numberOfGames) * 100,2) +'% | ' + 'Draw: ' + Math.round(((numberOfGames-numberOfWins-numberOfLosses)/numberOfGames) * 100,2) +'% | ' + 'Loss: ' + Math.round((numberOfLosses/numberOfGames) * 100) +'%'
 }
 
 

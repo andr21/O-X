@@ -354,12 +354,36 @@ var form = document.getElementById("trainForm");
 form.addEventListener('submit', handleForm);
 
 
-function handleForm(event) { event.preventDefault(); 
+
+
+function handleForm(event) { 
+event.preventDefault(); 
+
+
 console.log('training...');
+
 
 var trainValue = document.getElementById("trainQuantity").value;
 
 training(trainValue);
-
+updateStats()
 } 
 
+
+function updateStats(){
+var stats = document.getElementById("stats");
+
+stats.innerHTML= "Stats:<br>Games played: " + banana.numberOfGamesPlayed + "<br>Network size: " + banana.network.length;
+
+}
+
+function testComputer(){
+
+var results = testMind();
+
+var pResults = document.getElementById("results");
+
+pResults.innerHTML = results;
+
+updateStats()
+}
