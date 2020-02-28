@@ -29,8 +29,8 @@ if (OorX === 'O') {
 
 var networkPart= this.doIKnowThisState(gameState);
 
-console.log(gameState)
-console.log(networkPart);
+//console.log(gameState)
+//console.log(networkPart);
 
 var move = this.chooseFromNetworkPart(networkPart[0]);
 //console.log(move);
@@ -67,13 +67,13 @@ for (var m = 0; m <= 1; m++) {
 
  gameState = rotateState(gameState);
  }
- gameState = rotateState(gameState);
+ //gameState = rotateState(gameState);
+ 
+ 
+ 
  gameState = mirrorState(gameState);
 }
 
-//bringing it back to originsl state
-gameState = rotateState(gameState);
-gameState = mirrorState(gameState);
 
 /*
 Yes:
