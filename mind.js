@@ -25,16 +25,18 @@ if (OorX === 'O') {
  gameState = gameState.replace(/p/g,'X');
 }
 
-  
+
+
 var networkPart= this.doIKnowThisState(gameState);
 
-//console.log(networkPart);
+console.log(gameState)
+console.log(networkPart);
 
-var move = this.chooseFromNetworkPart(networkPart);
+var move = this.chooseFromNetworkPart(networkPart[0]);
 //console.log(move);
 
 /* save into gameMemory */
-this.gameMemory.push([networkPart, move,gameState]);
+this.gameMemory.push([networkPart[0], move,networkPart[3]]);
 
 
 if (this.gameMemory.length > 5) {
@@ -45,7 +47,7 @@ if (this.gameMemory.length > 5) {
 
 //console.log(this.gameMemory);
 
-return move;
+return convertMoveToOrginalState(move,networkPart[1],networkPart[2]);
 
 }
 
@@ -54,15 +56,24 @@ this.doIKnowThisState = function(gameState){
 
 var arrayLength = this.network.length;
 
-//console.log(arrayLength);
-for (var i = 0; i < arrayLength; i++) {
-    //console.log(this.network[i][0]);
+for (var m = 0; m <= 1; m++) {
+ for (var r = 0; r <= 3; r++) {
+
+  for (var i = 0; i < arrayLength; i++) {
     if (this.network[i][0] === gameState){
-       //console.log('i know this state');
-       return i
+       return [i,r,m,gameState];
     }
+  }
+
+ gameState = rotateState(gameState);
+ }
+ gameState = rotateState(gameState);
+ gameState = mirrorState(gameState);
 }
 
+//bringing it back to originsl state
+gameState = rotateState(gameState);
+gameState = mirrorState(gameState);
 
 /*
 Yes:
@@ -98,7 +109,7 @@ if ( arrayToAdd === [0,0,0,0,0,0,0,0,0]) {
 }
 
 
-return arrayLength;
+return [arrayLength,0,0,gameState];
 
 }
 
@@ -279,6 +290,41 @@ this.reset = function() {
 
 
 
+
+function rotateState(gameState){
+
+return gameState.charAt(6) + gameState.charAt(3) + gameState.charAt(0) + gameState.charAt(7) + gameState.charAt(4) + gameState.charAt(1) + gameState.charAt(8) + gameState.charAt(5) + gameState.charAt(2);
+
+}
+
+
+function mirrorState(gameState){
+
+return gameState.charAt(2) + gameState.charAt(1) + gameState.charAt(0) + gameState.charAt(5) + gameState.charAt(4) + gameState.charAt(3) + gameState.charAt(8) + gameState.charAt(7) + gameState.charAt(6);
+
+}
+
+
+function convertMoveToOrginalState(move,r,m){
+
+if (r === 0 && m === 0) {
+ return move;
+}
+var stringy = '---------'
+
+stringy = stringy.replaceAt(move,'X');
+
+
+ for (var i = 0; i < 4 - r; i++) {
+   stringy = rotateState(stringy);
+ }
+
+ if (m === 1){
+   stringy = mirrorState(stringy);
+ }
+
+return stringy.indexOf('X');
+}
 
 
 
